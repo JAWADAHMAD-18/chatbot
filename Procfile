@@ -1,1 +1,1 @@
-web: python api_rulebased.py
+web: gunicorn api_rulebased:app
