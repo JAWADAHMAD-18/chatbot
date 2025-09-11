@@ -133,6 +133,33 @@ def is_study_related(text):
 
 
 def process_message(message):
+    # --- Creator questions ---
+    creator_questions = [
+        "who created you",
+        "who made you",
+        "who is your creator",
+        "who developed you",
+        "who built you",
+        "who designed you",
+        "who is your owner",
+        "who is your developer",
+        "who is your founder",
+        "who is your boss",
+        "who is your admin",
+        "who is your maker",
+        "kis ne banaya",
+        "kis nay banaya",
+        "kisne banaya",
+        "kis nay develop kiya",
+        "kis ne develop kiya",
+        "kis ne design kiya",
+        "kis ne create kiya",
+        "kis ne tumhe banaya",
+        "kis ne tumhe develop kiya",
+    ]
+    for cq in creator_questions:
+        if cq in msg:
+            return "I was created by Mr Jawad, an innovative educator and developer. He designed me to help students like you with career and study guidance! If you want to know more about Jawad Institute or my features, just ask. 😊"
     message = normalize_abbreviations(message)
     msg = message.lower().strip()
 
