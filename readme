@@ -2,12 +2,6 @@
 
 > An AI-powered career guidance assistant for Pakistani students, built with Flask + Google Gemini API.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-PythonAnywhere-blue?style=for-the-badge)](https://jawad2004.pythonanywhere.com/)
-[![Python](https://img.shields.io/badge/Python-3.x-yellow?style=for-the-badge&logo=python)](https://python.org)
-[![Flask](https://img.shields.io/badge/Flask-2.x-black?style=for-the-badge&logo=flask)](https://flask.palletsprojects.com/)
-[![Gemini](https://img.shields.io/badge/Google%20Gemini-API-orange?style=for-the-badge&logo=google)](https://ai.google.dev/)
-
----
 
 ## 📌 About
 
