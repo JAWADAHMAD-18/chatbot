@@ -46,17 +46,29 @@ class MyraChatbot {
   async checkApiConnection() {
     try {
       this.showLoading("Connecting to Myra...");
-      const response = await fetch(`${this.apiBaseUrl}/careers`); // ✅ backend me /health nahi hai
+      const response = await fetch(`${this.apiBaseUrl}/careers`);
       if (response.ok) {
         this.hideLoading();
-        this.showSuccessToast("Connected to Myra successfully!");
+        // Welcome message add karo
+        this.addMessage(
+          `👋 <b>Hi, I'm Myra!</b> Your Career Guidance Assistant.<br><br>
+           I can help you with:<br>
+           <ul>
+             <li>🎓 Career paths after Matric, FSc, ICS</li>
+             <li>📝 Exam info (MDCAT, ECAT, NTS, CSS)</li>
+             <li>💡 Study tips & course selection</li>
+             <li>🏫 University & admission guidance</li>
+           </ul>
+           Ask me anything about your studies or career!`,
+          "bot",
+        );
       } else {
         throw new Error("API connection failed");
       }
     } catch (error) {
       this.hideLoading();
       this.showErrorToast(
-        "Unable to connect to Myra. Please check if the server is running."
+        "Unable to connect to Myra. Please check if the server is running.",
       );
     }
   }
@@ -100,12 +112,19 @@ class MyraChatbot {
       hour: "2-digit",
       minute: "2-digit",
     });
+
+    // Bot ka response HTML render karo, user ka plain text raho
+    const contentHtml =
+      sender === "bot"
+        ? content // HTML as-is render hoga
+        : `<p>${content}</p>`;
+
     messageDiv.innerHTML = `
       <div class="${sender}-avatar">
         <i class="fas ${sender === "bot" ? "fa-robot" : "fa-user"}"></i>
       </div>
       <div class="message-content">
-        <p>${content}</p>
+        ${contentHtml}
         <div class="message-time">${timestamp}</div>
       </div>
     `;

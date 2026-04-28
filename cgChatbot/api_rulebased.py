@@ -13,24 +13,25 @@ load_dotenv()
 # Gemini API Setup
 # -------------------------------
 api_key = os.getenv("GEMINI_API_KEY")
-genai.configure(api_key=api_key)  # Apni Gemini API key lagao
+genai.configure(api_key=api_key)  
 
 
 def ask_gemini(query):
-    """Send query to Gemini with modern, clear, engaging formatting and line/length limits."""
     prompt = f"""
-    You are an education assistant for Pakistani students.
-    Answer questions about study, career, exams, degrees, fields, or courses after FSc, ICS, Matric, or any education level.
-    Format your answer in a modern, visually clear way:
-    - Use bullet points, numbered lists, or short sections (not just a paragraph)
-    - Add emojis for friendliness and clarity
-    - Use bold or headings for key points if possible
-    - Sentences can be longer for clarity, but keep the answer easy to read
-    - Limit your answer to a maximum of 10–12 lines. If the answer is long, summarize the most important points.
-    - Use line breaks for clarity and avoid messy formatting.
-    If the question is completely off-topic (not about education, career, or study), reply: '❌ Please ask study-related questions only.'
-    Question: {query}
-    """
+You are Myra, a friendly career guidance assistant for Pakistani students.
+Answer ONLY questions about study, careers, exams, degrees, fields, or courses.
+
+Format your response using clean HTML (not markdown):
+- Use <b>bold</b> for key terms
+- Use <ul><li> for lists
+- Use <br> for line breaks
+- Keep it under 10 lines / 150 words
+- Be warm, encouraging, and use 1-2 relevant emojis
+
+If the question is off-topic, reply exactly: ❌ Please ask study-related questions only.
+
+Question: {query}
+"""
     model = genai.GenerativeModel("gemini-1.5-flash")
     response = model.generate_content(prompt)
     return response.text.strip()
@@ -66,9 +67,7 @@ def normalize_abbreviations(text):
     return " ".join([ABBREV_MAP.get(w, w) for w in words])
 
 
-# -------------------------------
 # Study Keywords (Allowlist)
-# -------------------------------
 STUDY_KEYWORDS = [
     "scope",
     "syllabus",
@@ -127,9 +126,7 @@ def is_study_related(text):
     return any(kw in text for kw in STUDY_KEYWORDS)
 
 
-# -------------------------------
 # Rule-Based Responses
-# -------------------------------
 
 
 def process_message(message):
@@ -268,9 +265,7 @@ def process_message(message):
     return "❌ Please ask study or career-related questions only."
 
 
-# -------------------------------
 # API Routes
-# -------------------------------
 @app.route("/api/chat", methods=["POST"])
 def chat():
     data = request.json
@@ -349,8 +344,6 @@ def search():
     return jsonify({"results": [f"Result for {query} 1", f"Result for {query} 2"]})
 
 
-# -------------------------------
 # Run Server
-# -------------------------------
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
