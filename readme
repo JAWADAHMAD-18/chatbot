@@ -1,0 +1,166 @@
+# 🤖 Myra — Career Guidance Chatbot
+
+> An AI-powered career guidance assistant for Pakistani students, built with Flask + Google Gemini API.
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-PythonAnywhere-blue?style=for-the-badge)](https://jawad2004.pythonanywhere.com/)
+[![Python](https://img.shields.io/badge/Python-3.x-yellow?style=for-the-badge&logo=python)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-2.x-black?style=for-the-badge&logo=flask)](https://flask.palletsprojects.com/)
+[![Gemini](https://img.shields.io/badge/Google%20Gemini-API-orange?style=for-the-badge&logo=google)](https://ai.google.dev/)
+
+---
+
+## 📌 About
+
+**Myra** is a smart chatbot designed for students in Pakistan to help them navigate career decisions, exam preparation, and course selection. It was originally built as part of the **Jawad Institute Student Guidance Portal**.
+
+Myra combines **rule-based responses** for common queries with **Google Gemini AI** for complex, open-ended study and career questions — giving students fast, structured, and helpful answers.
+
+---
+
+## ✨ Features
+
+- 🎓 Career guidance for students after Matric, FSc, ICS
+- 📝 Exam info — MDCAT, ECAT, NTS, CSS, GAT, GRE
+- 💡 Study tips, course selection, and degree guidance
+- 🏫 University and admission guidance
+- 🔤 Abbreviation normalization (`cs` → `computer science`, `fsc` → `pre-engineering`)
+- 🤖 Google Gemini AI fallback for complex queries
+- 💬 HTML-formatted bot responses (bullets, bold, lists)
+- ⌨️ Typing indicator animation
+- 🔔 Toast notifications (success/error)
+- 📱 Fully responsive design with dark mode support
+- 👋 Dynamic welcome message on load
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer      | Technology                        |
+|------------|-----------------------------------|
+| Backend    | Python, Flask, Flask-CORS         |
+| AI Model   | Google Gemini API (gemini-1.5-flash) |
+| Frontend   | HTML5, CSS3, Vanilla JavaScript   |
+| Deployment | PythonAnywhere                    |
+
+---
+
+## 📁 Project Structure
+
+```
+CHATBOT/
+├── api_rulebased.py     # Flask backend — rule-based logic + Gemini AI fallback
+├── rulebased.py         # Python class-based chatbot with regex pattern matching
+├── index.html           # Chat UI — welcome message, typing indicator, toasts
+├── style.css            # Responsive CSS with dark mode support
+├── script.js            # Frontend JS class (MyraChatbot) — API calls & rendering
+├── .env                 # Environment variables (not committed)
+└── README.md
+```
+
+---
+
+## ⚙️ Local Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/myra-chatbot.git
+cd myra-chatbot
+```
+
+### 2. Install dependencies
+
+```bash
+pip install flask flask-cors google-generativeai python-dotenv
+```
+
+### 3. Create `.env` file
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+> Get your free Gemini API key from [Google AI Studio](https://aistudio.google.com/)
+
+### 4. Run the backend
+
+```bash
+python api_rulebased.py
+```
+
+Flask will start at `http://localhost:5000`
+
+### 5. Open frontend
+
+Open `index.html` directly in your browser or serve it with any static server.
+
+> ⚠️ Make sure `script.js` has `apiBaseUrl = "http://localhost:5000/api"` for local development.
+
+---
+
+## 🚀 PythonAnywhere Deployment
+
+1. Upload all files to PythonAnywhere via the **Files** tab
+2. In the **Web** tab, set:
+   - **Source code**: `/home/yourusername/myra-chatbot`
+   - **WSGI file**: point to `api_rulebased.py`
+3. Set environment variable `GEMINI_API_KEY` in the WSGI config or `.env`
+4. Update `script.js`:
+   ```javascript
+   this.apiBaseUrl = "https://yourusername.pythonanywhere.com/api";
+   ```
+5. Click **Reload** in the Web tab
+
+---
+
+## 🔌 API Endpoints
+
+| Method | Endpoint                     | Description                        |
+|--------|------------------------------|------------------------------------|
+| POST   | `/api/chat`                  | Send a message, get bot reply      |
+| GET    | `/api/careers`               | List available career options      |
+| GET    | `/api/exams/<stream>`        | Get exams for a stream (cs/medical/engineering) |
+| GET    | `/api/skills/<stream>`       | Get skills for a stream            |
+| GET    | `/api/recommendations/<id>`  | Get personalized recommendations   |
+| POST   | `/api/appointment`           | Book a teacher appointment         |
+| POST   | `/api/feedback`              | Submit feedback                    |
+| POST   | `/api/user/profile`          | Update user profile                |
+
+### Example Request
+
+```json
+POST /api/chat
+{
+  "message": "What is the scope of computer science in Pakistan?"
+}
+```
+
+### Example Response
+
+```json
+{
+  "reply": "<b>Computer Science</b> has excellent scope in Pakistan:<ul><li>💻 Software Development</li><li>🤖 AI & Machine Learning</li><li>☁️ Cloud Computing</li></ul>"
+}
+```
+
+---
+
+
+
+## 👨‍💻 Author
+
+**Jawad** — Final Year CS Student @ IUB Bahawalpur  
+Building AI-powered web applications with the MERN stack.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/jawad-tech/)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/JAWADAHMAD-18)
+
+---
+
+## 📄 License
+
+This project is for educational purposes — part of the **Jawad Institute Student Guidance Portal**.
+
+---
+
+> 💬 *"Helping Pakistani students find the right path — one question at a time."*
